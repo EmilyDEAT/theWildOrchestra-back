@@ -1,18 +1,18 @@
 # the-wild-orchestra
 
-Ce projet répond au checkpoint finale à la Wild Code School
+Ce projet répond au checkpoint final de la Wild Code School
 
-Il est divisé en 2 repo ([un back](https://github.com/EmilyDEAT/theWildOrchestra-back)et [un front](https://github.com/EmilyDEAT/theWildOrchestra-front))
+Il est divisé en 2 repos ([un back](https://github.com/EmilyDEAT/theWildOrchestra-back)et [un front](https://github.com/EmilyDEAT/theWildOrchestra-front))
 
-Les technologie utilisé sont Node.js, React.js et Mysql.
+Les technologie utilisées sont Node.js, React.js et Mysql.
 
 # Pour visualiser le projet
 
-cloner les 2 repo
+cloner les 2 repos
 
 ## Côté back
 
-crée un .env avec les variables suivantes (en remplaçant les infos par les votre):
+crée un .env avec les variables suivantes (en remplaçant les infos par les votres):
 * SQL_HOST=host
 * SQL_USER=user
 * SQL_PASSWORD=password
