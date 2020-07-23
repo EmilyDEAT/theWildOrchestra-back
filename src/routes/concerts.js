@@ -3,7 +3,7 @@ const connection = require('../conf')
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  const sql = `SELECT concert.id, DATE_FORMAT(date, "%d-%m-%Y") AS date, TIME_FORMAT(time, "%H:%i") AS time, location.concert_hall, city.name AS city, project.title AS project
+  const sql = `SELECT concert.id, DATE_FORMAT(date, "%W-%d-%m-%Y") AS date, TIME_FORMAT(time, "%H:%i") AS time, location.concert_hall, city.name AS city, project.title AS project
   FROM concert
   JOIN location ON location.id = concert.id_location
   JOIN city ON city.id = location.id_city
@@ -11,7 +11,6 @@ router.get('/', (req, res) => {
   ORDER BY concert.date`
   connection.query(sql, (err, results) => {
     if (err) {
-      console.log(err)
       res.status(500).send('Erreur lors de la récupération des concerts')
     } else {
       res.status(200).send(results)
@@ -21,7 +20,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const idConcert = req.params.id
-  const sql = `SELECT concert.id, DATE_FORMAT(date, "%d-%m-%Y") AS date, TIME_FORMAT(time, "%H:%i") AS time, location.concert_hall, city.name AS city, project.title AS project
+  const sql = `SELECT concert.id, DATE_FORMAT(date, "%Y-%m-%d") AS date, TIME_FORMAT(time, "%H:%i") AS time, location.concert_hall, concert.id_location AS id_location, concert.id_project AS id_project, city.name AS city, project.title AS project
   FROM concert
   JOIN location ON location.id = concert.id_location
   JOIN city ON city.id = location.id_city
@@ -61,6 +60,7 @@ router.put('/:id', (req, res) => {
   const sql = 'UPDATE concert SET ? WHERE id = ?'
   connection.query(sql, [formData, idConcert], (err, stats) => {
     if (err) {
+      console.log(err)
       res.status(500).send("Erreur lors de la modification d'un concert'")
     } else {
       const sqlSelect = `SELECT * FROM concert WHERE id = ?`
