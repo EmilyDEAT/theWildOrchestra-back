@@ -57,7 +57,7 @@ CREATE TABLE `CONCERT` (
   KEY `fk_CONCERT_id_project` (`id_project`),
   CONSTRAINT `fk_CONCERT_id_location` FOREIGN KEY (`id_location`) REFERENCES `LOCATION` (`id`),
   CONSTRAINT `fk_CONCERT_id_project` FOREIGN KEY (`id_project`) REFERENCES `PROJECT` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,6 +133,7 @@ CREATE TABLE `MUSICIAN` (
   `firstname` varchar(60) NOT NULL,
   `lastname` varchar(60) NOT NULL,
   `id_instrument` int NOT NULL,
+  `photo` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_MUSICIAN_id_instrument` (`id_instrument`),
   CONSTRAINT `fk_MUSICIAN_id_instrument` FOREIGN KEY (`id_instrument`) REFERENCES `INSTRUMENT` (`id`)
@@ -145,7 +146,7 @@ CREATE TABLE `MUSICIAN` (
 
 LOCK TABLES `MUSICIAN` WRITE;
 /*!40000 ALTER TABLE `MUSICIAN` DISABLE KEYS */;
-INSERT INTO `MUSICIAN` VALUES (1,'Patricia','Beauchamp',1),(2,'Aurore','Babin',1),(3,'Victor','Gervais',2),(4,'Serge','Moreau',3),(5,'Joanna','Lagacé',6),(6,'Pierre','Raymond',4),(7,'Gabriel','Gabriel Richards',5);
+INSERT INTO `MUSICIAN` VALUES (1,'Patricia','Beauchamp',1,'https://cdn.pixabay.com/photo/2015/02/01/06/11/solo-violinist-619154_1280.jpg'),(2,'Aurore','Babin',1,'https://cdn.pixabay.com/photo/2018/10/14/00/12/girl-3745441_1280.jpg'),(3,'Victor','Gervais',2,'https://cdn.pixabay.com/photo/2014/07/31/23/36/violinist-407185_1280.jpg'),(4,'Serge','Moreau',3,'https://cdn.pixabay.com/photo/2014/11/07/20/34/cello-521172_1280.jpg'),(5,'Joanna','Lagacé',6,'https://cdn.pixabay.com/photo/2020/04/11/07/06/flautist-5029109_1280.jpg'),(6,'Pierre','Raymond',4,'https://cdn.pixabay.com/photo/2016/08/12/16/46/piano-player-1589152_1280.jpg'),(7,'Gabriel','Gabriel',5,'https://cdn.pixabay.com/photo/2015/05/27/12/38/clarinetist-786605_1280.jpg');
 /*!40000 ALTER TABLE `MUSICIAN` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,4 +183,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-23 17:07:20
+-- Dump completed on 2020-07-24 10:32:29
