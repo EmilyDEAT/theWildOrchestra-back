@@ -11,9 +11,11 @@ app.use(
   })
 )
 app.use(cors())
+app.use(express.static('uploads'))
 
 app.use('/api/cities', routes.Cities)
 app.use('/api/concerts', routes.Concerts)
+app.use('/api/instruments', routes.Instruments)
 app.use('/api/locations', routes.Locations)
 app.use('/api/musicians', routes.Musicians)
 app.use('/api/projects', routes.Projects)
