@@ -57,7 +57,7 @@ CREATE TABLE `CONCERT` (
   KEY `fk_CONCERT_id_project` (`id_project`),
   CONSTRAINT `fk_CONCERT_id_location` FOREIGN KEY (`id_location`) REFERENCES `LOCATION` (`id`),
   CONSTRAINT `fk_CONCERT_id_project` FOREIGN KEY (`id_project`) REFERENCES `PROJECT` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,10 +133,11 @@ CREATE TABLE `MUSICIAN` (
   `firstname` varchar(60) NOT NULL,
   `lastname` varchar(60) NOT NULL,
   `id_instrument` int NOT NULL,
+  `photo` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_MUSICIAN_id_instrument` (`id_instrument`),
   CONSTRAINT `fk_MUSICIAN_id_instrument` FOREIGN KEY (`id_instrument`) REFERENCES `INSTRUMENT` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +146,7 @@ CREATE TABLE `MUSICIAN` (
 
 LOCK TABLES `MUSICIAN` WRITE;
 /*!40000 ALTER TABLE `MUSICIAN` DISABLE KEYS */;
-INSERT INTO `MUSICIAN` VALUES (1,'Patricia','Beauchamp',1),(2,'Aurore','Babin',1),(3,'Victor','Gervais',2),(4,'Serge','Moreau',3),(5,'Joanna','Lagacé',6),(6,'Pierre','Raymond',4),(7,'Gabriel','Gabriel Richards',5);
+INSERT INTO `MUSICIAN` VALUES (1,'Patricia','Beauchamp',1,'solo-violinist-619154_1920.jpg'),(2,'Aurore','Babin',1,'girl-3961381_1920.jpg'),(3,'Victor','Gervais',2,'violinist-407185_1920.jpg'),(4,'Serge','Moreau',3,'cello-521172_1920.jpg'),(5,'Joanna','Lagacé',6,'flautist-5029109_1920.jpg'),(6,'Pierre','Raymond',4,'piano-player-1589152_1920.jpg'),(7,'Gabriel','Berger',5,'clarinetist-786605_1920.jpg');
 /*!40000 ALTER TABLE `MUSICIAN` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,4 +183,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-23 17:07:20
+-- Dump completed on 2020-07-27 10:57:56
