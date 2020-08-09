@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `CITY`
+-- Table structure for table `city`
 --
 
-DROP TABLE IF EXISTS `CITY`;
+DROP TABLE IF EXISTS `city`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `CITY` (
+CREATE TABLE `city` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
@@ -30,23 +30,23 @@ CREATE TABLE `CITY` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `CITY`
+-- Dumping data for table `city`
 --
 
-LOCK TABLES `CITY` WRITE;
-/*!40000 ALTER TABLE `CITY` DISABLE KEYS */;
-INSERT INTO `CITY` VALUES (1,'Paris'),(2,'Strasbourg'),(3,'Orléans'),(4,'Rennes');
-/*!40000 ALTER TABLE `CITY` ENABLE KEYS */;
+LOCK TABLES `city` WRITE;
+/*!40000 ALTER TABLE `city` DISABLE KEYS */;
+INSERT INTO `city` VALUES (1,'Paris'),(2,'Strasbourg'),(3,'Orléans'),(4,'Rennes');
+/*!40000 ALTER TABLE `city` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `CONCERT`
+-- Table structure for table `concert`
 --
 
-DROP TABLE IF EXISTS `CONCERT`;
+DROP TABLE IF EXISTS `concert`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `CONCERT` (
+CREATE TABLE `concert` (
   `id` int NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
   `time` time NOT NULL,
@@ -55,29 +55,29 @@ CREATE TABLE `CONCERT` (
   PRIMARY KEY (`id`),
   KEY `fk_CONCERT_id_location` (`id_location`),
   KEY `fk_CONCERT_id_project` (`id_project`),
-  CONSTRAINT `fk_CONCERT_id_location` FOREIGN KEY (`id_location`) REFERENCES `LOCATION` (`id`),
-  CONSTRAINT `fk_CONCERT_id_project` FOREIGN KEY (`id_project`) REFERENCES `PROJECT` (`id`)
+  CONSTRAINT `fk_CONCERT_id_location` FOREIGN KEY (`id_location`) REFERENCES `location` (`id`),
+  CONSTRAINT `fk_CONCERT_id_project` FOREIGN KEY (`id_project`) REFERENCES `project` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `CONCERT`
+-- Dumping data for table `concert`
 --
 
-LOCK TABLES `CONCERT` WRITE;
-/*!40000 ALTER TABLE `CONCERT` DISABLE KEYS */;
-INSERT INTO `CONCERT` VALUES (1,'2020-09-04','20:30:00',1,1),(2,'2020-09-16','20:30:00',2,2),(3,'2020-09-23','20:30:00',3,2),(4,'2020-10-10','20:30:00',5,1),(5,'2020-10-16','20:30:00',2,3),(6,'2020-10-31','15:00:00',4,1),(10,'2020-12-10','15:00:00',3,1);
-/*!40000 ALTER TABLE `CONCERT` ENABLE KEYS */;
+LOCK TABLES `concert` WRITE;
+/*!40000 ALTER TABLE `concert` DISABLE KEYS */;
+INSERT INTO `concert` VALUES (1,'2020-09-04','20:30:00',1,1),(2,'2020-09-16','20:30:00',2,2),(3,'2020-09-23','20:30:00',3,2),(4,'2020-10-10','20:30:00',5,1),(5,'2020-10-16','20:30:00',2,3),(6,'2020-10-31','15:00:00',4,1),(10,'2020-12-10','15:00:00',3,1);
+/*!40000 ALTER TABLE `concert` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `INSTRUMENT`
+-- Table structure for table `instrument`
 --
 
-DROP TABLE IF EXISTS `INSTRUMENT`;
+DROP TABLE IF EXISTS `instrument`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `INSTRUMENT` (
+CREATE TABLE `instrument` (
   `id` int NOT NULL AUTO_INCREMENT,
   `instrument` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
@@ -85,50 +85,50 @@ CREATE TABLE `INSTRUMENT` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `INSTRUMENT`
+-- Dumping data for table `instrument`
 --
 
-LOCK TABLES `INSTRUMENT` WRITE;
-/*!40000 ALTER TABLE `INSTRUMENT` DISABLE KEYS */;
-INSERT INTO `INSTRUMENT` VALUES (1,'violon'),(2,'alto'),(3,'violoncelle'),(4,'piano'),(5,'clarinette'),(6,'flûte');
-/*!40000 ALTER TABLE `INSTRUMENT` ENABLE KEYS */;
+LOCK TABLES `instrument` WRITE;
+/*!40000 ALTER TABLE `instrument` DISABLE KEYS */;
+INSERT INTO `instrument` VALUES (1,'violon'),(2,'alto'),(3,'violoncelle'),(4,'piano'),(5,'clarinette'),(6,'flûte');
+/*!40000 ALTER TABLE `instrument` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `LOCATION`
+-- Table structure for table `location`
 --
 
-DROP TABLE IF EXISTS `LOCATION`;
+DROP TABLE IF EXISTS `location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `LOCATION` (
+CREATE TABLE `location` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_city` int NOT NULL,
   `concert_hall` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_LOCATION_id_city` (`id_city`),
-  CONSTRAINT `fk_LOCATION_id_city` FOREIGN KEY (`id_city`) REFERENCES `CITY` (`id`)
+  CONSTRAINT `fk_LOCATION_id_city` FOREIGN KEY (`id_city`) REFERENCES `city` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `LOCATION`
+-- Dumping data for table `location`
 --
 
-LOCK TABLES `LOCATION` WRITE;
-/*!40000 ALTER TABLE `LOCATION` DISABLE KEYS */;
-INSERT INTO `LOCATION` VALUES (1,1,'La Scala'),(2,1,'Philharmonie de Paris'),(3,2,'Cité de la musique et de la danse'),(4,3,'Théâtre d\'Orléans'),(5,4,'Le Triangle');
-/*!40000 ALTER TABLE `LOCATION` ENABLE KEYS */;
+LOCK TABLES `location` WRITE;
+/*!40000 ALTER TABLE `location` DISABLE KEYS */;
+INSERT INTO `location` VALUES (1,1,'La Scala'),(2,1,'Philharmonie de Paris'),(3,2,'Cité de la musique et de la danse'),(4,3,'Théâtre d\'Orléans'),(5,4,'Le Triangle');
+/*!40000 ALTER TABLE `location` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `MUSICIAN`
+-- Table structure for table `musician`
 --
 
-DROP TABLE IF EXISTS `MUSICIAN`;
+DROP TABLE IF EXISTS `musician`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `MUSICIAN` (
+CREATE TABLE `musician` (
   `id` int NOT NULL AUTO_INCREMENT,
   `firstname` varchar(60) NOT NULL,
   `lastname` varchar(60) NOT NULL,
@@ -136,28 +136,28 @@ CREATE TABLE `MUSICIAN` (
   `photo` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_MUSICIAN_id_instrument` (`id_instrument`),
-  CONSTRAINT `fk_MUSICIAN_id_instrument` FOREIGN KEY (`id_instrument`) REFERENCES `INSTRUMENT` (`id`)
+  CONSTRAINT `fk_MUSICIAN_id_instrument` FOREIGN KEY (`id_instrument`) REFERENCES `instrument` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `MUSICIAN`
+-- Dumping data for table `musician`
 --
 
-LOCK TABLES `MUSICIAN` WRITE;
-/*!40000 ALTER TABLE `MUSICIAN` DISABLE KEYS */;
-INSERT INTO `MUSICIAN` VALUES (1,'Patricia','Beauchamp',1,'solo-violinist-619154_1920.jpg'),(2,'Aurore','Babin',1,'girl-3961381_1920.jpg'),(3,'Victor','Gervais',2,'violinist-407185_1920.jpg'),(4,'Serge','Moreau',3,'cello-521172_1920.jpg'),(5,'Joanna','Lagacé',6,'flautist-5029109_1920.jpg'),(6,'Pierre','Raymond',4,'piano-player-1589152_1920.jpg'),(7,'Gabriel','Berger',5,'clarinetist-786605_1920.jpg');
-/*!40000 ALTER TABLE `MUSICIAN` ENABLE KEYS */;
+LOCK TABLES `musician` WRITE;
+/*!40000 ALTER TABLE `musician` DISABLE KEYS */;
+INSERT INTO `musician` VALUES (1,'Patricia','Beauchamp',1,'solo-violinist-619154_1920.jpg'),(2,'Aurore','Babin',1,'girl-3961381_1920.jpg'),(3,'Victor','Gervais',2,'violinist-407185_1920.jpg'),(4,'Serge','Moreau',3,'cello-521172_1920.jpg'),(5,'Joanna','Lagacé',6,'flautist-5029109_1920.jpg'),(6,'Pierre','Raymond',4,'piano-player-1589152_1920.jpg'),(7,'Gabriel','Berger',5,'clarinetist-786605_1920.jpg');
+/*!40000 ALTER TABLE `musician` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `PROJECT`
+-- Table structure for table `project`
 --
 
-DROP TABLE IF EXISTS `PROJECT`;
+DROP TABLE IF EXISTS `project`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `PROJECT` (
+CREATE TABLE `project` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
@@ -165,13 +165,13 @@ CREATE TABLE `PROJECT` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `PROJECT`
+-- Dumping data for table `project`
 --
 
-LOCK TABLES `PROJECT` WRITE;
-/*!40000 ALTER TABLE `PROJECT` DISABLE KEYS */;
-INSERT INTO `PROJECT` VALUES (1,'Wild Nuova'),(2,'Musica'),(3,'Space');
-/*!40000 ALTER TABLE `PROJECT` ENABLE KEYS */;
+LOCK TABLES `project` WRITE;
+/*!40000 ALTER TABLE `project` DISABLE KEYS */;
+INSERT INTO `project` VALUES (1,'Wild Nuova'),(2,'Musica'),(3,'Space');
+/*!40000 ALTER TABLE `project` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
