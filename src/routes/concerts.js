@@ -40,20 +40,11 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const formData = req.body
   const sql = 'INSERT INTO concert SET ?'
+  const sqlSelect = `SELECT * FROM concert WHERE id = ?`
   connection
     .queryAsync(sql, formData)
-    .then((stats) => {
-      const sqlSelect = `SELECT * FROM concert WHERE id = ?`
-      connection.query(sqlSelect, stats.insertId, (err, results) => {
-        if (err) {
-          res
-            .status(500)
-            .send('Erreur lors de la récupération du concert ajouté')
-        } else {
-          res.status(200).send(results[0])
-        }
-      })
-    })
+    .then((stats) => connection.queryAsync(sqlSelect, stats.insertId))
+    .then((results) => res.status(201).send(results[0]))
     .catch((err) => {
       loggers.mysql(err.message)
       res.status(500).send("Erreur lors de l'ajout d'un concert'")
