@@ -1,5 +1,6 @@
 const express = require('express')
 const connection = require('../conf')
+const loggers = require('../helpers/loggers')
 const router = express.Router()
 
 router.get('/', (req, res) => {
@@ -11,6 +12,7 @@ router.get('/', (req, res) => {
   ORDER BY concert.date`
   connection.query(sql, (err, results) => {
     if (err) {
+      loggers.mysql(err.message)
       res.status(500).send('Erreur lors de la récupération des concerts')
     } else {
       res.status(200).send(results)

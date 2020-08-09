@@ -3,6 +3,7 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 const routes = require('./src/routes/index')
+const loggers = require('./src/helpers/loggers')
 
 app.use(express.json())
 app.use(
@@ -22,7 +23,8 @@ app.use('/api/projects', routes.Projects)
 
 app.listen(8000, (err) => {
   if (err) {
+    loggers.express('ERROR', err.message)
     throw new Error('Something bad just happened...')
   }
-  console.log(`Server is listening on 8000`)
+  loggers.express(`Server is listening on 8000`)
 })
