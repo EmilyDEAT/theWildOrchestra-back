@@ -1,7 +1,7 @@
 const express = require('express')
 const connection = require('../conf')
 const router = express.Router()
-const multer  = require('multer')
+const multer = require('multer')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -49,7 +49,7 @@ router.get('/:id', (req, res) => {
   WHERE musician.id = ?`
   connection.query(sql, idMusician, (err, results) => {
     if (err) {
-      res.status(500).send("Erreur lors de la récupération du musicien")
+      res.status(500).send('Erreur lors de la récupération du musicien')
     } else {
       res.status(200).send(results[0])
     }
@@ -57,28 +57,31 @@ router.get('/:id', (req, res) => {
 })
 router.post('/', upload.single('photo'), (req, res) => {
   console.log(req.file)
-   const sqlInsertPhoto = 'INSERT INTO musician (firstname, lastname, id_instrument, photo) VALUES (?,?,?,?)'
-   const musicianData = [
+  const sqlInsertPhoto =
+    'INSERT INTO musician (firstname, lastname, id_instrument, photo) VALUES (?,?,?,?)'
+  const musicianData = [
     req.body.firstname,
     req.body.lastname,
     req.body.id_instrument,
-    req.file.filename,
-   ]
-   connection.query(sqlInsertPhoto, musicianData, (err, stats) => {
-     if (err) {
+    req.file.filename
+  ]
+  connection.query(sqlInsertPhoto, musicianData, (err, stats) => {
+    if (err) {
       res.status(500).send("Erreur lors de l'ajout d'un musicen'")
-     } else {
+    } else {
       const sqlSelect = `SELECT * FROM musician WHERE id = ?`
       connection.query(sqlSelect, stats.insertId, (err, results) => {
         if (err) {
-          res.status(500).send("Erreur lors de la récupération du musicien ajouté")
+          res
+            .status(500)
+            .send('Erreur lors de la récupération du musicien ajouté')
         } else {
           res.status(200).send(results[0])
         }
       })
-     }   
-   })
- })
+    }
+  })
+})
 
 router.put('/:id', (req, res) => {
   const idMusician = req.params.id
@@ -91,7 +94,9 @@ router.put('/:id', (req, res) => {
       const sqlSelect = `SELECT * FROM musician WHERE id = ?`
       connection.query(sqlSelect, idMusician, (err, results) => {
         if (err) {
-          res.status(500).send("Erreur lors de la récupération du musicien modifié")
+          res
+            .status(500)
+            .send('Erreur lors de la récupération du musicien modifié')
         } else {
           res.status(200).send(results[0])
         }

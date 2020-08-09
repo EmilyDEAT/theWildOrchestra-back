@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
   WHERE concert.id = ?`
   connection.query(sql, idConcert, (err, results) => {
     if (err) {
-      res.status(500).send("Erreur lors de la récupération du concert")
+      res.status(500).send('Erreur lors de la récupération du concert')
     } else {
       res.status(200).send(results[0])
     }
@@ -47,7 +47,9 @@ router.post('/', (req, res) => {
       const sqlSelect = `SELECT * FROM concert WHERE id = ?`
       connection.query(sqlSelect, stats.insertId, (err, results) => {
         if (err) {
-          res.status(500).send("Erreur lors de la récupération du concert ajouté")
+          res
+            .status(500)
+            .send('Erreur lors de la récupération du concert ajouté')
         } else {
           res.status(200).send(results[0])
         }
@@ -68,7 +70,9 @@ router.put('/:id', (req, res) => {
       const sqlSelect = `SELECT * FROM concert WHERE id = ?`
       connection.query(sqlSelect, idConcert, (err, results) => {
         if (err) {
-          res.status(500).send("Erreur lors de la récupération du concert modifié")
+          res
+            .status(500)
+            .send('Erreur lors de la récupération du concert modifié')
         } else {
           res.status(200).send(results[0])
         }

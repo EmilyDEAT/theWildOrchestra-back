@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
   database: process.env.SQL_NAME
 })
 
-connection.connect(err => {
+connection.connect((err) => {
   if (err) throw err
   loggers.mysql('connected !')
 })
