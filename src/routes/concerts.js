@@ -37,18 +37,18 @@ router.get('/:id', (req, res) => {
   })
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const formData = req.body
-  const sql = 'INSERT INTO concert SET ?'
-  const sqlSelect = `SELECT * FROM concert WHERE id = ?`
-  connection
-    .queryAsync(sql, formData)
-    .then((stats) => connection.queryAsync(sqlSelect, stats.insertId))
-    .then((results) => res.status(201).send(results[0]))
-    .catch((err) => {
-      loggers.mysql(err.message)
-      res.status(500).send("Erreur lors de l'ajout d'un concert'")
-    })
+  try {
+    const sql = 'INSERT INTO concert SET ?'
+    const stats = await connection.queryAsync(sql, formData)
+    const sqlSelect = `SELECT * FROM concert WHERE id = ?`
+    const results = await connection.queryAsync(sqlSelect, stats.insertId)
+    res.status(200).send(results[0])
+  } catch (err) {
+    loggers.mysql(err.message)
+    res.status(500).send("Erreur lors de l'ajout d'un concert'")
+  }
 })
 
 router.put('/:id', (req, res) => {
