@@ -50,27 +50,18 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   const idConcert = req.params.id
   const formData = req.body
   const sql = 'UPDATE concert SET ? WHERE id = ?'
-  connection.query(sql, [formData, idConcert], (err, stats) => {
-    if (err) {
-      console.log(err)
-      res.status(500).send("Erreur lors de la modification d'un concert'")
-    } else {
-      const sqlSelect = `SELECT * FROM concert WHERE id = ?`
-      connection.query(sqlSelect, idConcert, (err, results) => {
-        if (err) {
-          res
-            .status(500)
-            .send('Erreur lors de la récupération du concert modifié')
-        } else {
-          res.status(200).send(results[0])
-        }
-      })
-    }
-  })
+  try {
+    await connection.queryAsync(sql, [formData, idConcert])
+    const concert = await concertModel.findOneById(idConcert)
+    res.status(200).send(concert)
+  } catch (err) {
+    console.log(err)
+    res.status(500).send("Erreur lors de la modification d'un concert'")
+  }
 })
 
 router.delete('/:id', (req, res) => {
